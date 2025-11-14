@@ -3,7 +3,6 @@ from src.config import TIME, STEP, SCALE, MOVE
 
 
 class SignalGenerator:
-    """Generuje idealny sygnał bazowy u(t) = SCALE * sin(t) + MOVE."""
 
     def __init__(self, time=TIME, step=STEP, scale=SCALE, move=MOVE):
         self.time = time
