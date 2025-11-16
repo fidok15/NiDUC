@@ -24,7 +24,7 @@ LARGE_ERROR_BASE = 50.0
 
 #Voters
 #próg głosujący 
-ALPHA = 0.1
+EPSILON = 0.1
 #próg wygładzający Smoothing voter
 BETA = 0.1
 

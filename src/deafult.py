@@ -10,7 +10,7 @@ class SignalGenerator:
         self.scale = scale
         self.move = move
 
-    def generate(self) -> tuple[np.ndarray, np.ndarray]:
+    def generate(self):
         t = np.arange(0, self.time, self.step)
         u = self.scale * np.sin(t) + self.move
         return t, u

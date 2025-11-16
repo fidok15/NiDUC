@@ -29,7 +29,7 @@ class SensorArray:
         self.error_size_down = error_size_down
         self.error_size_up = error_size_up
 
-    def generate_signals(self, base_signal: np.ndarray) -> np.ndarray:
+    def generate_signals(self, base_signal: np.ndarray):
         num_points = len(base_signal)
         sensors = np.zeros((self.num_sensors, num_points))
         num_to_fail = min(self.num_fault_sensors, self.num_sensors)
