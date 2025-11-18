@@ -1,55 +1,51 @@
 import numpy as np
 from .base import Voter
 from src.config import EPSILON, BETA
+from .majority_voter import MajorityVoter
+
 
 class SmoothingVoter(Voter):
+    """
+    Algorithm Smoothing Voter (SM)
+    Priority: The Availability-Safety Trade-off
+    """
+
     def __init__(self, epsilon=EPSILON, beta=BETA):
         self.epsilon = epsilon
         self.beta = beta
+
         self.previous_vote = None
 
+        self.maj_voter = MajorityVoter(epsilon=epsilon)
+
     def vote(self, sensor_values: np.ndarray):
-        # liczba czujników
-        n = len(sensor_values)
+        # Step 1: Check majority
+        result_maj = self.maj_voter.vote(sensor_values)
 
-        # wymagana większość
-        required = (n + 1) // 2
+        if result_maj is not None:
+            # Majority found
+            self.previous_vote = result_maj
+            return result_maj
 
-        for i in range(n):
-            group = [sensor_values[i]]
-
-            # sprawdzamy każdy czujnik i dodajemy do grupy te których wartość leży w zakresie wartosc +/- epsilon
-            for j in range(n):
-                if i == j:
-                    continue
-                if abs(sensor_values[i] - sensor_values[j]) <= self.epsilon:
-                    group.append(sensor_values[j])
-
-            # sprawdzenie większości
-            if len(group) >= required:
-                result = float(np.mean(group))
-                self.previous_vote = result  # zapisujemy poprawny wynik
-                return result
-
-        # jeśli jest to pierwszy cykl i nie ma poprzedniego wyniku nie można wygładzać
+        # Step 2: Absence of majority. Begin smoothing
         if self.previous_vote is None:
-            # zwracamy medianę jako najlepsze pierwsze przybliżenie
+            # In the first cycle (t=0), we take the median as the starting point if there is no majority.
             initial = float(np.median(sensor_values))
             self.previous_vote = initial
             return initial
 
-        X = self.previous_vote  # ostatni poprawny wynik
+        X = self.previous_vote
 
-        # szukamy najbliższego aktualnego pomiaru do poprzedniego wyniku
-        distances = [abs(v - X) for v in sensor_values]
-        k = int(np.argmin(distances))
-        x_k = float(sensor_values[k])
-        d = distances[k]
+        # Step 3: Searching for the closest variant to the previous result.
+        distances = np.abs(sensor_values - X)
+        min_distance_index = np.argmin(distances)
+        x_k = float(sensor_values[min_distance_index])
+        d = distances[min_distance_index]
 
-        # weryfikacja progu beta
+        # Step 4: Beta verification (smoothing)
         if d <= self.beta:
-            # akceptujemy najbliższą wartość
             self.previous_vote = x_k
             return x_k
-
-        return None
+        else:
+            # Smoothing failed. Return None (No Result).
+            return None
