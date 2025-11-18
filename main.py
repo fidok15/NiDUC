@@ -4,26 +4,31 @@ from src.noise import SensorArray
 from src.config import NUM_SENSORS, RANDOM_SEED
 from src.voters.majority_voter import MajorityVoter
 from src.voters.weighted_voter import WeightedVoter
-
+from src.voters.smoothing_voter import SmoothingVoter
 
 def main():
+    #podstawowy sygnał
     base_gen = SignalGenerator()
     t, base_signal = base_gen.generate()
-
-    sensors = SensorArray(random_state=RANDOM_SEED)
-    signals = sensors.generate_signals(base_signal)
-    median = MajorityVoter()
-    weightedSignal = WeightedVoter()
-
-    # tablica median w danych chwilach czasowych
-    # voted_output = [median.vote(signals[:, i]) for i in range(len(t))]
-    # print(voted_output)
     
-    # tablica wazonych wartosci w chwilach czasowych
-    print(weightedSignal)
-    voted_output = [weightedSignal.vote(signals[:, i]) for i in range(len(t))]
-    print(voted_output)
+    #sygnał z zakloceniami
+    sensors = SensorArray(random_state=RANDOM_SEED)
+    signals = sensors.generate_signals(base_signal)    
 
+
+    median = MajorityVoter()
+    # tablica median w danych chwilach czasowych
+    voted_output = [median.vote(signals[:, i]) for i in range(len(t))]
+    print(voted_output)
+    
+    weightedSignal = WeightedVoter()
+    # tablica wazonych wartosci w chwilach czasowych
+    # voted_output = [weightedSignal.vote(signals[:, i]) for i in range(len(t))]
+    # print(voted_output)
+
+    smoothingVoter = SmoothingVoter()
+
+    #smoothing voter trzeba jakoś podać poprawny poprzedni stan 
     plt.figure(figsize=(10, 5))
     plt.plot(t, base_signal, label="Sygnał idealny", color="black", linewidth=2)
     

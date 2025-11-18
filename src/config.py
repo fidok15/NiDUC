@@ -19,7 +19,7 @@ NORMAL_NOISE_STD = 5
 #zakres naszego błędu 
 ERROR_SIZE_UP = 1.8
 ERROR_SIZE_DOWN = 0.8
-#maksymalna amplituda błędów
+#amplituda błędów
 LARGE_ERROR_BASE = 50.0
 
 #Voters
@@ -30,3 +30,4 @@ BETA = 0.1
 
 #notatki 
 # majority voter podnosi falge aby uzytkoniwk mogl wybrać safe state 
+#co jak blad wystapi od chili 0 to smoothing voter nigdy nie bedzie mial parametru previous 
