@@ -32,3 +32,9 @@ ERROR_SIZE_DOWN = 0.8
 EPSILON = 0.6 
 # Beta (Smoothing Threshold) - Used by SM for temporal consistency
 BETA = 0.6
+
+# --- RESEARCH PARAMETERS ---
+# Range of e_max to test (X-axis for our comparison plots)
+# Starting from 0.5 up to 10.0, with 20 data points
+ERROR_AMPLITUDES = np.linspace(0.5, 10.0, 20)
+NUM_MONTE_CARLO_RUNS = 1000  # 1000 runs for faster testing

@@ -8,18 +8,13 @@ from src.deafult import SignalGenerator
 from src.noise import SensorArray
 from src.calculations import calculate_statistics
 from src.plots import plot_performance_curves, plot_results
-from src.config import RANDOM_SEED, NUM_FAULT_SENSORS, NUM_SENSORS, LARGE_ERROR_BASE
+from src.config import RANDOM_SEED, NUM_FAULT_SENSORS, NUM_SENSORS, LARGE_ERROR_BASE, ERROR_AMPLITUDES, \
+    NUM_MONTE_CARLO_RUNS
 
 # Import all Voter implementations
 from src.voters.majority_voter import MajorityVoter
 from src.voters.smoothing_voter import SmoothingVoter
 from src.voters.weighted_voter import WeightedVoter
-
-# --- RESEARCH PARAMETERS ---
-# Range of e_max to test (X-axis for our comparison plots)
-# Starting from 0.5 up to 10.0, with 20 data points
-ERROR_AMPLITUDES = np.linspace(0.5, 10.0, 20)
-NUM_MONTE_CARLO_RUNS = 1000  # 1000 runs for faster testing
 
 
 def run_single_simulation_cycle(voters, e_max):
