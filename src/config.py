@@ -15,19 +15,20 @@ SCALE = 100
 
 # Zakłócenia
 #A_T
-NORMAL_NOISE_STD = 5
+NORMAL_NOISE_STD = 0.5
 #zakres naszego błędu 
 ERROR_SIZE_UP = 1.8
 ERROR_SIZE_DOWN = 0.8
 #amplituda błędów
-LARGE_ERROR_BASE = 50.0
+LARGE_ERROR_BASE = 10.0
 
 #Voters
 #próg głosujący 
-EPSILON = 0.1
+EPSILON = 0.6
 #próg wygładzający Smoothing voter
-BETA = 0.1
+BETA = 0.6
 
 #notatki 
 # majority voter podnosi falge aby uzytkoniwk mogl wybrać safe state 
 #co jak blad wystapi od chili 0 to smoothing voter nigdy nie bedzie mial parametru previous 
+# if self.previous_vote is None: w smoothing do poprawy

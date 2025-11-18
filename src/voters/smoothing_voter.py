@@ -32,11 +32,11 @@ class SmoothingVoter(Voter):
                 return result
 
         # jeśli jest to pierwszy cykl i nie ma poprzedniego wyniku nie można wygładzać
-        # if self.previous_vote is None:
-        #     # zwracamy medianę jako najlepsze pierwsze przybliżenie
-        #     initial = float(np.median(sensor_values))
-        #     self.previous_vote = initial
-        #     return initial
+        if self.previous_vote is None:
+            # zwracamy medianę jako najlepsze pierwsze przybliżenie
+            initial = float(np.median(sensor_values))
+            self.previous_vote = initial
+            return initial
 
         X = self.previous_vote  # ostatni poprawny wynik
 
