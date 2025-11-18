@@ -1,32 +1,35 @@
 import numpy as np
 from .base import Voter
-from src.config import EPSILON 
+from src.config import EPSILON
+
 
 class MajorityVoter(Voter):
+    """
+    Algorithm Majority Voter (MAJ) for TMR (N=3).
+    Priority: Safety. In absence of majority returns None
+    """
+
     def __init__(self, epsilon=EPSILON):
         self.epsilon = epsilon
 
     def vote(self, sensor_values: np.ndarray):
-        #liczba czujnikow
-        n = len(sensor_values)
+        # Step 1: Sort input values (x1 <= x2 <= x3)
+        sorted_values = np.sort(sensor_values)
+        x1, x2, x3 = sorted_values[0], sorted_values[1], sorted_values[2]
 
-        #wymagana większość  
-        required = (n + 1) // 2
+        # Step 2: Check if majority exists
 
-        for i in range(n):
-            group = [sensor_values[i]]
-            
-            #sprawdzamy kazdy czujnik i dodajemy do grupy te ktorych wartosc lezy w zakresie wartosc +/- alfa 
-            for j in range(n):
-                if i == j:
-                    continue
-                if abs(sensor_values[i] - sensor_values[j]) <= self.epsilon:
-                    group.append(sensor_values[j])
+        # Check (x1, x2)
+        if abs(x1 - x2) <= self.epsilon:
+            # Majority found (x1, x2, (maybe x3))
+            # Choose average value from group.
+            return float((x1 + x2) / 2)
 
-            #sprawdzenie większości
-            if len(group) >= required:
-                return float(np.mean(group))
-        #zwrocenie mediany z grupy poprawnych 
-        majoritySignal = float(np.median(sensor_values))
+        # Check (x2, x3)
+        if abs(x2 - x3) <= self.epsilon:
+            # Majority found (x2, x3)
+            # Return average
+            return float((x2 + x3) / 2)
 
-        return majoritySignal
+        # Step 3: Absence of majority.
+        return None
