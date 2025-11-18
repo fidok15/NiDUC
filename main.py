@@ -1,4 +1,4 @@
-# simulation_core.py - Monte Carlo Experiments
+# main.py - Monte Carlo Experiments
 
 import numpy as np
 import matplotlib.pyplot as plt
