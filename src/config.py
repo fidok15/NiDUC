@@ -20,13 +20,14 @@ NORMAL_NOISE_STD = 0.01
 ERROR_SIZE_UP = 1.8
 ERROR_SIZE_DOWN = 0.8
 #amplituda błędów
-LARGE_ERROR_BASE = 100.0
-
+LARGE_ERROR_BASE = 10.0
+ERROR_CHANGE = 5
+NUM_ITERATION = 20
 #Voters
 #próg głosujący 
-EPSILON = 0.6
+EPSILON = 15
 #próg wygładzający Smoothing voter
-BETA = 0.6
+BETA = 15
 
 #notatki 
 # majority voter podnosi falge aby uzytkoniwk mogl wybrać safe state 
