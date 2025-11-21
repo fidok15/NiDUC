@@ -1,12 +1,12 @@
 import numpy as np
 
 # Ustawienia losowości
-RANDOM_SEED = None
+RANDOM_SEED = 1
 
 # Liczba czujników
 NUM_SENSORS = 3
 # Liczba wadliwych czujników
-NUM_FAULT_SENSORS = 1
+NUM_FAULT_SENSORS = 2
 # Parametry sygnału
 TIME = 5 * np.pi
 STEP = 0.1
@@ -15,12 +15,12 @@ SCALE = 100
 
 # Zakłócenia
 #A_T
-NORMAL_NOISE_STD = 0.5
+NORMAL_NOISE_STD = 0.01
 #zakres naszego błędu 
 ERROR_SIZE_UP = 1.8
 ERROR_SIZE_DOWN = 0.8
 #amplituda błędów
-LARGE_ERROR_BASE = 10.0
+LARGE_ERROR_BASE = 100.0
 
 #Voters
 #próg głosujący 
