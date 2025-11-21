@@ -6,7 +6,7 @@ RANDOM_SEED = 1
 # Liczba czujników
 NUM_SENSORS = 3
 # Liczba wadliwych czujników
-NUM_FAULT_SENSORS = 2
+NUM_FAULT_SENSORS = 3
 # Parametry sygnału
 TIME = 5 * np.pi
 STEP = 0.1
@@ -15,19 +15,19 @@ SCALE = 100
 
 # Zakłócenia
 #A_T
-NORMAL_NOISE_STD = 0.01
+NORMAL_NOISE_STD = 0.001
 #zakres naszego błędu 
-ERROR_SIZE_UP = 1.8
-ERROR_SIZE_DOWN = 0.8
+ERROR_SIZE_UP = 1
+ERROR_SIZE_DOWN = 1
 #amplituda błędów
-LARGE_ERROR_BASE = 10.0
-ERROR_CHANGE = 5
-NUM_ITERATION = 20
+LARGE_ERROR_BASE = 0
+ERROR_CHANGE = 1
+NUM_ITERATION = 100
 #Voters
 #próg głosujący 
-EPSILON = 15
+EPSILON = 0.5
 #próg wygładzający Smoothing voter
-BETA = 15
+BETA = 1
 
 #notatki 
 # majority voter podnosi falge aby uzytkoniwk mogl wybrać safe state 

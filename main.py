@@ -8,7 +8,7 @@ from src.voters.smoothing_voter import SmoothingVoter
 import pandas as pd
 from src.calculations import calculate_statistics
 from src.plots import plot_results
-
+from src.summary_plots import plot_comparison
 # uruchomienie voterow
 def run_voter(voter, signals):
     outputs = []
@@ -17,8 +17,7 @@ def run_voter(voter, signals):
         result = voter.vote(sensor_values)
         outputs.append(result)
     return outputs
-
-
+    
 def main():
     #podstawowy sygnał
     base_gen = SignalGenerator()
@@ -48,11 +47,12 @@ def main():
         stats_smoothing = calculate_statistics(base_signal, sm_output)
 
         #wykresy
-        if i == 0 or i == NUM_ITERATION - 1:
-            plot_results(t, base_signal, signals, maj_output, stats_majority, title="Majority Voter")
-            plot_results(t, base_signal, signals, wt_output, stats_weighted, title="Weighted Voter")
-            plot_results(t, base_signal, signals, sm_output, stats_smoothing, title="Smoothing Voter")
+        # if i == 0 or i == NUM_ITERATION - 1:
+        #     plot_results(t, base_signal, signals, maj_output, stats_majority, title="Majority Voter")
+        #     plot_results(t, base_signal, signals, wt_output, stats_weighted, title="Weighted Voter")
+        #     plot_results(t, base_signal, signals, sm_output, stats_smoothing, title="Smoothing Voter")
 
+        #zapisanie do słownika
         results.append({
             'itteration': i,
             'current_error': error,
@@ -67,8 +67,10 @@ def main():
             'sm_nd': stats_smoothing['detection_nd']
         })
 
+    #wywołanie sumarczynych wykresów
     df_results = pd.DataFrame(results)
     print(df_results.to_string(index=False))
+    plot_comparison(df_results)
 
 
 
