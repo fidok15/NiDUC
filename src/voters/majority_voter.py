@@ -12,21 +12,12 @@ class MajorityVoter(Voter):
 
         #wymagana większość  
         required = (n + 1) // 2
+        sorted_values = np.sort(sensor_values)
 
-        for i in range(n):
-            group = [sensor_values[i]]
+        for i in range(n - required + 1):
+            subset = sorted_values[i : i + required]
             
-            #sprawdzamy kazdy czujnik i dodajemy do grupy te ktorych wartosc lezy w zakresie wartosc +/- alfa 
-            for j in range(n):
-                if i == j:
-                    continue
-                if abs(sensor_values[i] - sensor_values[j]) <= self.epsilon:
-                    group.append(sensor_values[j])
-
-            #sprawdzenie większości
-            if len(group) >= required:
-                return float(np.mean(group))
-        #zwrocenie mediany z grupy poprawnych 
-        majoritySignal = float(np.median(sensor_values))
-
-        return majoritySignal
+            if abs(subset[-1] - subset[0]) <= self.epsilon:
+                return float(np.mean(subset))
+            
+        return None
