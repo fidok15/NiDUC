@@ -114,7 +114,7 @@ class SensorArray:
                 # wybór typu błędu
                 error_type = self.rng.choice(
                     ["ramp", "drift", "flatten"],
-                    p=[0.4, 0.3, 0.3]
+                    p=[0.5, 0.49, 0.01]
                 )
 
                 if error_type == "ramp":

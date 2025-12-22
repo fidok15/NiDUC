@@ -27,7 +27,7 @@ NUM_ITERATION = 100
 #próg głosujący 
 EPSILON = 0.5
 #próg wygładzający Smoothing voter
-BETA = 1
+BETA = 7
 
 #notatki 
 # majority voter podnosi falge aby uzytkoniwk mogl wybrać safe state 
