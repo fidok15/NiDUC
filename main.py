@@ -46,8 +46,8 @@ def main():
         stats_weighted = calculate_statistics(base_signal, wt_output)
         stats_smoothing = calculate_statistics(base_signal, sm_output)
 
-        #wykresy
-        # if i == 0 or i == NUM_ITERATION - 1:
+        # wykresy
+        # if i == 10 or i == NUM_ITERATION - 1:
         #     plot_results(t, base_signal, signals, maj_output, stats_majority, title="Majority Voter")
         #     plot_results(t, base_signal, signals, wt_output, stats_weighted, title="Weighted Voter")
         #     plot_results(t, base_signal, signals, sm_output, stats_smoothing, title="Smoothing Voter")

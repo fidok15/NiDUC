@@ -60,25 +60,6 @@ class SensorArray:
 
         return signal
 
-    def flatten(self, signal, start, end, fault_length):
-        flatten_factor = self.rng.uniform(0.3, 0.9)
-
-        flat_value = signal[start] * flatten_factor
-
-        # sygnał gubi dynamikę – dąży do stałej wartości
-        signal[start:end] = (
-            flat_value +
-            (1 - flatten_factor) * signal[start:end]
-        )
-
-        # po błędzie sygnał może wrócić lub pozostać wypłaszczony
-        if self.rng.random() < 0.4:
-            signal[end:] = (
-                flat_value +
-                (1 - flatten_factor) * signal[end:]
-            )
-
-        return signal
 
 
     def generate_signals(self, base_signal: np.ndarray):
@@ -113,16 +94,15 @@ class SensorArray:
                 fault_length = end - start
                 # wybór typu błędu
                 error_type = self.rng.choice(
-                    ["ramp", "drift", "flatten"],
-                    p=[0.4, 0.3, 0.3]
+                    ["ramp", "drift"],
+                    p=[0.5, 0.5]
                 )
 
                 if error_type == "ramp":
                     noisy_signal = self.ramp(noisy_signal, start, end, error_magnitude,fault_length)
                 elif error_type == "drift":
                     noisy_signal = self.drift(noisy_signal, start, end, error_magnitude,fault_length)
-                elif error_type == "flatten":
-                    noisy_signal = self.flatten(noisy_signal, start, end,fault_length)
+                
                 
             sensors[i, :] = noisy_signal
 

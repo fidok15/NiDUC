@@ -1,7 +1,7 @@
 import numpy as np
 
 # Ustawienia losowości
-RANDOM_SEED = 1
+RANDOM_SEED = 2
 
 # Liczba czujników
 NUM_SENSORS = 3
