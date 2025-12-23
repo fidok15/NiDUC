@@ -1,7 +1,7 @@
 import numpy as np
 
 # Ustawienia losowości
-RANDOM_SEED = 2
+RANDOM_SEED = 1
 
 # Liczba czujników
 NUM_SENSORS = 3
@@ -25,9 +25,9 @@ ERROR_CHANGE = 1
 NUM_ITERATION = 100
 #Voters
 #próg głosujący 
-EPSILON = 0.5
+EPSILON = 0.4
 #próg wygładzający Smoothing voter
-BETA = 1
+BETA = 7
 
 #notatki 
 # majority voter podnosi falge aby uzytkoniwk mogl wybrać safe state 

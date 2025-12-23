@@ -14,8 +14,8 @@ def plot_results(t, base_signal, signals, voted_output, stats, title):
     # wynik głosowania
     plt.plot(t, voted_output, label="Wynik głosowania", color="red", linewidth=3)
 
-    plt.xlabel("Czas")
-    plt.ylabel("u(t)")
+    plt.xlabel("Czas [s]")
+    plt.ylabel("u(t) [j.u.]")
     plt.title(title)
     plt.grid(True)
     plt.legend(loc=1)
